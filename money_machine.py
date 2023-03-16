@@ -14,10 +14,16 @@ class MoneyMachine:
     def report(self):
         print(f"Money: {self.CURRENCY}{self.profit}")
 
+    def ask_coins(self, coin):
+        coins = ''
+        while not coins.isdigit():
+            coins = input(f"How many {coin}?: ")
+        return int(coins) * self.COIN_VALUE[coin]
     def process_coins(self):
         print("Please insert coins")
         for coin in self.COIN_VALUE:
-            self.money_received += int(input(f"How many {coin}?: ")) * self.COIN_VALUE[coin]
+            self.money_received += self.ask_coins(coin)
+
         return self.money_received
 
     def make_payment(self, cost):
